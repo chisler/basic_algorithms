@@ -1,10 +1,17 @@
 from collections import deque
 
+# graph = {
+#     "a": ["c"],
+#     "b": ["a", "c"],
+#     "c": ["d"],
+#     "d": []
+# }
+
 graph = {
-    "a": ["c"],
-    "b": ["a", "c"],
-    "c": ["d"],
-    "d": []
+    "a": ["b", "e", "c"],
+    "b": ["d"],
+    "d": ["e"],
+    "c": ["e"]
 }
 
 visited = {}
@@ -42,5 +49,5 @@ def get_path(start, end):
     return list(reversed(reversed_path))
 
 
-search("b", "d")
-print(get_path("b", "d"))
+search("a", "e")
+print(get_path("a", "e"))

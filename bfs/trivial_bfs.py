@@ -1,7 +1,7 @@
 from collections import deque
 
 graph = {
-    "a": ["b", "c"],
+    "a": ["b", "e", "c"],
     "b": ["d"],
     "d": ["e"],
     "c": ["e"]
@@ -29,7 +29,8 @@ def search(start, end):
                 return
 
             for v in graph[current]:
-                stack.append((v, current))
+                if not visited.get(v, False):
+                    stack.append((v, current))
 
 
 def get_path(start, end):
