@@ -1,16 +1,16 @@
 graph = {
-    "a": ["b", "c"],
-    "b": [],
-    "c": ["b"]
+    "a": ["c"],
+    "b": ["a", "c"],
+    "c": ["d"],
+    "d": []
 }
 
 visited = {}
 
+path = {}
+
 
 def search(current, end):
-    if visited.get(current, False):
-        return
-
     visited[current] = True
 
     if current == end:
@@ -18,7 +18,21 @@ def search(current, end):
         return
 
     for vertex in graph[current]:
-        search(vertex, end)
+        if not visited.get(vertex, False):
+            path[vertex] = current
+            search(vertex, end)
 
 
-search("b", "a")
+def get_path(start, end):
+    reversed_path = []
+
+    while end != start:
+        reversed_path.append(end)
+        end = path[end]
+
+    reversed_path.append(start)
+    return list(reversed(reversed_path))
+
+
+search("b", "d")
+print(get_path("b", "d"))
