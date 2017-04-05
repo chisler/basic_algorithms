@@ -8,7 +8,7 @@ from collections import deque
 # }
 
 graph = {
-    "a": ["b", "e", "c"],
+    "a": ["c", "e", "b"],
     "b": ["d"],
     "d": ["e"],
     "c": ["e"]
@@ -26,16 +26,16 @@ def search(start, end):
 
     while stack:
         current = stack.pop()
-        visited[current] = True
+        if not visited.get(current):
+            visited[current] = True
 
-        if current == end:
-            print("hooray")
-            return
+            if current == end:
+                print("hooray")
+                return
 
-        for v in graph[current]:
-            if not visited.get(v, False):
-                path[v] = current
-                stack.append(v)
+            for v in graph[current]:
+                    path[v] = current
+                    stack.append(v)
 
 
 def get_path(start, end):

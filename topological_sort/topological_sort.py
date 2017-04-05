@@ -14,10 +14,6 @@ graph2 = {
     "b": ["a"]
 }
 
-colors = {}
-
-path = {}
-
 
 class Color(object):
     WHITE = 1
@@ -25,11 +21,9 @@ class Color(object):
     BLACK = 3
 
 
-
-
-
 def topologicat_sort(graph):
     order = deque()
+    colors = {}
 
     def search(current):
         colors[current] = Color.GREY
@@ -55,5 +49,34 @@ def topologicat_sort(graph):
     return order
 
 
+def dfs(graph):
+    order = deque()
+    stack = deque()
+
+    first_item = next(iter(graph))
+    order.append(first_item)
+    colors = {}
+
+    while order:
+        c = order.pop()
+        if not colors.get(c):
+            stack.append(c)
+            colors[c] = Color.GREY
+
+            for child in graph[c]:
+                child_color = colors.get(child)
+
+                if child_color is None:
+                    order.append(child)
+
+                if child_color == Color.GREY:
+                    raise ValueError("Cycle")
+
+    return stack
+
+
 print(topologicat_sort(graph1))
-print(topologicat_sort(graph2))
+# print(topologicat_sort(graph2))
+
+print(dfs(graph1))
+# print(dfs(graph2))
