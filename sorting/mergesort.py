@@ -1,3 +1,6 @@
+from sorting.utils import test_sorting
+
+
 def merge(a, b):
     i, j, res = 0, 0, []
 
@@ -24,4 +27,4 @@ def sort(array):
     return list(merge(sort(array[:l//2]), sort(array[l//2:])))
 
 
-print(sort([3, 2,1, 4, -2]))
+test_sorting(sort)
